@@ -1,0 +1,641 @@
+/* CSS Custom Properties for Theme Colors */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-secondary: #333333;
+    --text-muted: rgba(0, 0, 0, 0.7);
+    --border-color: #e0e0e0;
+}
+
+/* Dark theme colors - will be overridden by manual toggle */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --bg-color: #0d1117;
+        --text-color: #f0f6fc;
+        --text-secondary: #e6edf3;
+        --text-muted: rgba(240, 246, 252, 0.7);
+        --border-color: #30363d;
+    }
+}
+
+/* Manual theme overrides */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-secondary: #333333;
+    --text-muted: rgba(0, 0, 0, 0.7);
+    --border-color: #e0e0e0;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0d1117;
+    --text-color: #f0f6fc;
+    --text-secondary: #e6edf3;
+    --text-muted: rgba(240, 246, 252, 0.7);
+    --border-color: #30363d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    line-height: 1.25
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* Theme Toggle Switch Styles */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle {
+    position: relative;
+    display: inline-block;
+}
+
+.theme-switch {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-label {
+    display: block;
+    width: 60px;
+    height: 30px;
+    background-color: var(--border-color);
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid var(--border-color);
+}
+
+.theme-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-text {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+}
+
+.theme-switch:checked + .theme-label {
+    background-color: var(--text-color);
+}
+
+.theme-switch:checked + .theme-label .theme-slider {
+    transform: translateX(30px);
+    background-color: var(--bg-color);
+}
+
+.theme-switch:checked + .theme-label .theme-text {
+    opacity: 0;
+}
+
+.theme-switch:checked + .theme-label::after {
+    content: "☀️";
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+/* Hover effects */
+.theme-label:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+/* Mobile responsiveness for toggle */
+@media screen and (max-width: 768px) {
+    .theme-toggle-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .theme-label {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .theme-slider {
+        width: 20px;
+        height: 20px;
+        top: 1px;
+        left: 1px;
+    }
+    
+    .theme-switch:checked + .theme-label .theme-slider {
+        transform: translateX(25px);
+    }
+    
+    .theme-text {
+        font-size: 12px;
+        right: 5px;
+    }
+    
+    .theme-switch:checked + .theme-label::after {
+        font-size: 12px;
+        left: 6px;
+    }
+}
+
+li {
+    list-style: none
+}
+
+body>div {
+    padding: 0
+}
+
+.page_title {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 47px;
+    color: var(--text-secondary);
+}
+
+.homePage_container {
+    max-width: 600px
+}
+
+.homePage_container>img {
+    max-width: 500px;
+    padding-right: 31px;
+    width: 80vw
+}
+
+.homePage_container>p {
+    font-size: 12px
+}
+
+.homePage_headerText {
+    margin-bottom: 20px;
+    margin-top: 10px
+}
+
+.homePage_subtext {
+    opacity: 1
+}
+
+.exhibition_container {
+    display: flex;
+    flex-direction: row;
+    font-size: 12px
+}
+
+.exhibition_about,.exhibition_description {
+    max-width: 200px;
+    margin-left: 20px
+}
+
+.exhibition_description_title,.social_link {
+    font-weight: 700
+}
+
+.ex_image_container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    margin-left: 50px;
+    width: 300px;
+    margin-bottom: 100px
+}
+
+.ex_image_container,.ex_image_container>img {
+    -webkit-object-fit: contain;
+    object-fit: contain
+}
+
+.ex_image_container>img {
+    max-width: 300px;
+    margin-bottom: 10px
+}
+
+.contacts_container {
+    display: flex;
+    flex-direction: row;
+    max-width: 800px
+}
+
+.ex_description {
+    max-width: 300px
+}
+
+.ex_caousel {
+    height: 500px;
+    max-height: 100vw;
+    margin-left: 20px;
+    overflow: visible
+}
+
+.ex_caousel,.grid-square {
+    width: 100%;
+    position: relative
+}
+
+.grid-square {
+    padding-bottom: 100%
+}
+
+.grid-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-object-fit: cover;
+    object-fit: cover
+}
+
+@media screen and (max-width: 770px) {
+    .contacts_container {
+        flex-direction:column
+    }
+
+    .contacts_container>div {
+        margin-bottom: 50px
+    }
+}
+
+.ac_arrow {
+    position: absolute;
+    bottom: -20px;
+    font-size: 40px;
+    z-index: 9999
+}
+
+.control-dots {
+    bottom: 0!important
+}
+
+.ac_carousel {
+    max-width: 400px;
+    width: 90vw
+}
+
+.ac_left {
+    left: 0
+}
+
+.ac_left,.ac_right {
+    font-size: 25px;
+    position: absolute;
+    bottom: 35px;
+    z-index: 9999;
+    cursor: pointer
+}
+
+.ac_right {
+    right: -10px
+}
+
+@media screen and (max-width: 768px) {
+    .hide_mobile {
+        height:25px
+    }
+
+    .ex_caousel {
+        margin: 25px 0 0;
+        padding-bottom: 100px;
+        border: none
+    }
+
+    .carousel_button {
+        font-size: 15px!important;
+        padding: 5px!important
+    }
+
+    .desc_txt {
+        font-size: 10px
+    }
+
+    *,.exhibition_container,.homePage_container>p,.page_title {
+        font-size: 16px
+    }
+
+    .ex_image_container {
+        display: flex;
+        width: 100%;
+        margin-left: 0
+    }
+
+    .ex_image_container>img {
+        width: 80vw;
+        height: unset;
+        max-width: unset
+    }
+}
+
+.no_select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.works_container {
+    display: grid;
+    max-width: 800px;
+    grid-template-columns: auto auto
+}
+
+@media screen and (max-width: 600px) {
+    .works_container {
+        grid-template-columns:1fr;
+        grid-template-rows: auto auto
+    }
+
+    .works_ac {
+        margin-left: 20px;
+        width: 90%
+    }
+}
+
+.thumb {
+    opacity: 1;
+    border: none!important
+}
+
+.selected.thumb {
+    border: 2px solid #666!important
+}
+
+.thumb:hover {
+    opacity: .7;
+    -webkit-transition: all .3 ease-out;
+    transition: all .3 ease-out
+}
+
+.contact_column {
+    padding-left: 6vw
+}
+
+@media screen and (max-width: 768px) {
+    .contact_column {
+        padding-left:0;
+        margin-top: -60px
+    }
+    
+    /* Main container responsive styles - keep centered with proper margins */
+    .homePage_container {
+        margin-right: auto !important;
+        margin-left: auto !important;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+        max-width: 85% !important;
+    }
+    
+    /* Grid layout improvements for mobile - maintain left alignment */
+    .css-1u0o7j0 {
+        grid-template-columns: 1fr !important;
+        grid-gap: 20px !important;
+        margin-bottom: 30px !important;
+    }
+    
+    .css-zd4of5 {
+        grid-column: span 1/span 1 !important;
+        text-align: center !important;
+        margin-bottom: 20px;
+    }
+    
+    .css-rklm6r {
+        grid-column: span 1/span 1 !important;
+        /* Keep left alignment for text content */
+    }
+    
+    /* Work experience grid improvements - maintain structure */
+    .css-1o42c8k {
+        grid-template-columns: 1fr !important;
+        grid-gap: 15px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .css-zy08ml {
+        grid-column: span 1/span 1 !important;
+        /* Keep original left alignment */
+        margin-bottom: 10px;
+    }
+    
+    .css-14l6pud {
+        grid-column: span 1/span 1 !important;
+    }
+    
+    /* Typography responsive scaling - keep left alignment */
+    .css-19khvfy {
+        font-size: 28px !important;
+        line-height: 1.2 !important;
+        /* Maintain left alignment */
+    }
+    
+    .css-16locuo, .css-jtc8nn {
+        font-size: 20px !important;
+        margin-top: 30px !important;
+        margin-bottom: 20px !important;
+        /* Keep left alignment */
+    }
+    
+    .css-u14vgh {
+        font-size: 16px !important;
+        /* Keep left alignment and flex properties */
+    }
+    
+    .css-g5qhb2 {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+        /* Keep left alignment */
+    }
+    
+    .css-y83l2k {
+        font-size: 13px !important;
+        /* Keep left alignment */
+    }
+    
+    /* Profile image responsive - center only the image */
+    .css-zd4of5 img {
+        width: 150px !important;
+        height: 150px !important;
+        max-width: 150px !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    /* About section text - keep left aligned */
+    .homePage_subtext {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 20px !important;
+        /* Keep left alignment */
+    }
+    
+    /* Skills section - keep left aligned */
+    div p[style*="text-align: left"] {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        /* Keep left alignment */
+    }
+    
+    /* Find Me On section - keep left aligned */
+    .css-links {
+        margin-bottom: 8px !important;
+        font-size: 14px !important;
+        /* Keep left alignment */
+    }
+    
+    /* Links styling for mobile */
+    a {
+        word-break: break-word;
+    }
+}
+
+/* Additional responsive breakpoint for very small screens */
+@media screen and (max-width: 480px) {
+    .homePage_container {
+        margin-right: auto !important;
+        margin-left: auto !important;
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+        padding-top: 30px !important;
+        max-width: 90% !important;
+    }
+    
+    .css-19khvfy {
+        font-size: 24px !important;
+    }
+    
+    .css-16locuo, .css-jtc8nn {
+        font-size: 18px !important;
+    }
+    
+    .css-u14vgh {
+        font-size: 14px !important;
+    }
+    
+    .css-g5qhb2 {
+        font-size: 13px !important;
+    }
+    
+    .css-y83l2k {
+        font-size: 12px !important;
+    }
+    
+    .css-zd4of5 img {
+        width: 120px !important;
+        height: 120px !important;
+        max-width: 120px !important;
+    }
+}
+
+/* Dark Mode Overrides for Inline Styles - Auto and Manual */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .css-y83l2k {
+        color: var(--text-muted) !important;
+    }
+    
+    :root:not([data-theme]) .css-19khvfy,
+    :root:not([data-theme]) .css-16locuo,
+    :root:not([data-theme]) .css-jtc8nn,
+    :root:not([data-theme]) .css-u14vgh,
+    :root:not([data-theme]) .css-g5qhb2,
+    :root:not([data-theme]) h1, 
+    :root:not([data-theme]) h2, 
+    :root:not([data-theme]) h3, 
+    :root:not([data-theme]) p {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) [style*="color: black"] {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) [style*="opacity: 0.7"] {
+        color: var(--text-muted) !important;
+        opacity: 1 !important;
+    }
+    
+    :root:not([data-theme]) a {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) .chakra-text,
+    :root:not([data-theme]) .chakra-heading {
+        color: var(--text-color) !important;
+    }
+}
+
+/* Manual Dark Theme Overrides */
+[data-theme="dark"] .css-y83l2k {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .css-19khvfy,
+[data-theme="dark"] .css-16locuo,
+[data-theme="dark"] .css-jtc8nn,
+[data-theme="dark"] .css-u14vgh,
+[data-theme="dark"] .css-g5qhb2,
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] p {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] [style*="color: black"] {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] [style*="opacity: 0.7"] {
+    color: var(--text-muted) !important;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] a {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] a:hover {
+    opacity: 0.7 !important;
+}
+
+[data-theme="dark"] .chakra-text,
+[data-theme="dark"] .chakra-heading {
+    color: var(--text-color) !important;
+}
