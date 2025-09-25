@@ -1,3 +1,40 @@
+/* CSS Custom Properties for Theme Colors */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-secondary: #333333;
+    --text-muted: rgba(0, 0, 0, 0.7);
+    --border-color: #e0e0e0;
+}
+
+/* Dark theme colors - will be overridden by manual toggle */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --bg-color: #0d1117;
+        --text-color: #f0f6fc;
+        --text-secondary: #e6edf3;
+        --text-muted: rgba(240, 246, 252, 0.7);
+        --border-color: #30363d;
+    }
+}
+
+/* Manual theme overrides */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-secondary: #333333;
+    --text-muted: rgba(0, 0, 0, 0.7);
+    --border-color: #e0e0e0;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0d1117;
+    --text-color: #f0f6fc;
+    --text-secondary: #e6edf3;
+    --text-muted: rgba(240, 246, 252, 0.7);
+    --border-color: #30363d;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +43,134 @@
     line-height: 1.25
 }
 
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 a {
-    color: #000;
-    text-decoration: none
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* Theme Toggle Switch Styles */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle {
+    position: relative;
+    display: inline-block;
+}
+
+.theme-switch {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-label {
+    display: block;
+    width: 60px;
+    height: 30px;
+    background-color: var(--border-color);
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid var(--border-color);
+}
+
+.theme-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-text {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+}
+
+.theme-switch:checked + .theme-label {
+    background-color: var(--text-color);
+}
+
+.theme-switch:checked + .theme-label .theme-slider {
+    transform: translateX(30px);
+    background-color: var(--bg-color);
+}
+
+.theme-switch:checked + .theme-label .theme-text {
+    opacity: 0;
+}
+
+.theme-switch:checked + .theme-label::after {
+    content: "☀️";
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+/* Hover effects */
+.theme-label:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+/* Mobile responsiveness for toggle */
+@media screen and (max-width: 768px) {
+    .theme-toggle-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .theme-label {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .theme-slider {
+        width: 20px;
+        height: 20px;
+        top: 1px;
+        left: 1px;
+    }
+    
+    .theme-switch:checked + .theme-label .theme-slider {
+        transform: translateX(25px);
+    }
+    
+    .theme-text {
+        font-size: 12px;
+        right: 5px;
+    }
+    
+    .theme-switch:checked + .theme-label::after {
+        font-size: 12px;
+        left: 6px;
+    }
 }
 
 li {
@@ -16,7 +178,7 @@ li {
 }
 
 body>div {
-    padding: 0 31px
+    padding: 0
 }
 
 .page_title {
@@ -24,7 +186,7 @@ body>div {
     font-weight: 700;
     line-height: 1.25;
     margin-bottom: 47px;
-    color: #333
+    color: var(--text-secondary);
 }
 
 .homePage_container {
@@ -400,4 +562,80 @@ body>div {
         height: 120px !important;
         max-width: 120px !important;
     }
+}
+
+/* Dark Mode Overrides for Inline Styles - Auto and Manual */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .css-y83l2k {
+        color: var(--text-muted) !important;
+    }
+    
+    :root:not([data-theme]) .css-19khvfy,
+    :root:not([data-theme]) .css-16locuo,
+    :root:not([data-theme]) .css-jtc8nn,
+    :root:not([data-theme]) .css-u14vgh,
+    :root:not([data-theme]) .css-g5qhb2,
+    :root:not([data-theme]) h1, 
+    :root:not([data-theme]) h2, 
+    :root:not([data-theme]) h3, 
+    :root:not([data-theme]) p {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) [style*="color: black"] {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) [style*="opacity: 0.7"] {
+        color: var(--text-muted) !important;
+        opacity: 1 !important;
+    }
+    
+    :root:not([data-theme]) a {
+        color: var(--text-color) !important;
+    }
+    
+    :root:not([data-theme]) .chakra-text,
+    :root:not([data-theme]) .chakra-heading {
+        color: var(--text-color) !important;
+    }
+}
+
+/* Manual Dark Theme Overrides */
+[data-theme="dark"] .css-y83l2k {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .css-19khvfy,
+[data-theme="dark"] .css-16locuo,
+[data-theme="dark"] .css-jtc8nn,
+[data-theme="dark"] .css-u14vgh,
+[data-theme="dark"] .css-g5qhb2,
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] p {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] [style*="color: black"] {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] [style*="opacity: 0.7"] {
+    color: var(--text-muted) !important;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] a {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] a:hover {
+    opacity: 0.7 !important;
+}
+
+[data-theme="dark"] .chakra-text,
+[data-theme="dark"] .chakra-heading {
+    color: var(--text-color) !important;
 }
